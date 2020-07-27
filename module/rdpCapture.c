@@ -1013,7 +1013,7 @@ rdpCapture2(rdpClientCon *clientCon, RegionPtr in_reg, BoxPtr *out_rects,
     scroll_rect->y2 = 0;
 
     /* only try to detect a scroll rectangle if area is big enough */
-    if(extents_rect.y2 - extents_rect.y1 >= SCROLL_DET_MIN_H &&
+    if(0 && extents_rect.y2 - extents_rect.y1 >= SCROLL_DET_MIN_H &&
        extents_rect.x2 - extents_rect.x1 >= SCROLL_DET_MIN_W &&
        num_diff_first_rows >= SCROLL_DET_MIN_FIRST_ROW_CHANGES)
     {
@@ -1046,10 +1046,10 @@ rdpCapture2(rdpClientCon *clientCon, RegionPtr in_reg, BoxPtr *out_rects,
                         /* check scroll offsets */
                         crc_offset = (y / 64) * crc_stride + (x / 64);
                         target_hash = clientCon->rfx_crcs[crc_offset];
-                        row_hashes = clientCon->rfx_tile_row_hashes + 
+                        row_hashes = clientCon->rfx_tile_row_hashes +
                             (rect.x1 / 64) * tile_row_stride + rect.y1;
-                        wyhash_count_offsets(row_hashes, target_hash, 
-                            offset_histogram, NUM_SCROLL_OFFSETS, 
+                        wyhash_count_offsets(row_hashes, target_hash,
+                            offset_histogram, NUM_SCROLL_OFFSETS,
                             SCROLL_SEARCH_DIST);
                     }
                 }
@@ -1093,7 +1093,7 @@ rdpCapture2(rdpClientCon *clientCon, RegionPtr in_reg, BoxPtr *out_rects,
                         crc_offset = (y / 64) * crc_stride + (x / 64);
                         old_hash = clientCon->rfx_crcs[crc_offset];
                         new_hash = wyhash_rfx_tile_from_rows(
-                            clientCon->rfx_tile_row_hashes, tile_row_stride, 
+                            clientCon->rfx_tile_row_hashes, tile_row_stride,
                             rect.x1, rect.y1);
                         if(old_hash == new_hash)
                         {
