@@ -1105,8 +1105,6 @@ rdpCapture2(rdpClientCon *clientCon, RegionPtr in_reg, BoxPtr *out_rects,
                 x += 64;
             }
 
-            DTRACE_PROBE2(xorgxrdp, rdpCapture2_scrollmap, num_checked, num_matched);
-
             /* find large rectangle from bitmap */
             seed_y = ((extents_rect.y2 + extents_rect.y1) / 2) / 64;
             found = find_scroll_rect(scrolled_map, crc_stride, 
